@@ -1,0 +1,153 @@
+/* ====== Colores base ====== */
+:root {
+  --vidrio: rgba(255, 255, 255, 0.10);
+  --borde: rgba(255, 255, 255, 0.25);
+  --texto: #f4f2ff;
+  --texto-suave: rgba(244, 242, 255, 0.75);
+  --acento: #7ef0d6;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+  color: var(--texto);
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1b1037 0%, #2a1a5e 50%, #0f2a4a 100%);
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+/* ====== Manchas de color animadas ====== */
+.blob {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.6;
+  z-index: -1;
+  animation: flotar 14s ease-in-out infinite alternate;
+}
+.blob-1 { width: 420px; height: 420px; background: #ff5fa2; top: -100px; left: -80px; }
+.blob-2 { width: 380px; height: 380px; background: #3fd2ff; bottom: -120px; right: -60px; animation-delay: -5s; }
+.blob-3 { width: 300px; height: 300px; background: #a46bff; top: 40%; left: 45%; animation-delay: -9s; }
+
+@keyframes flotar {
+  to { transform: translate(60px, 40px) scale(1.15); }
+}
+
+/* ====== El efecto VIDRIO (lo principal) ====== */
+.glass {
+  background: var(--vidrio);
+  border: 1px solid var(--borde);
+  border-radius: 22px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+}
+
+/* ====== Diseño general ====== */
+.contenedor {
+  max-width: 1050px;
+  margin: 0 auto;
+  padding: 48px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.titulo-seccion { font-size: 1.5rem; margin-bottom: 18px; }
+
+/* ====== Encabezado ====== */
+.hero { padding: 48px 40px; text-align: center; }
+.etiqueta {
+  display: inline-block;
+  padding: 6px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--borde);
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--acento);
+}
+.hero h1 { font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.15; margin: 18px 0; }
+.hero p { color: var(--texto-suave); max-width: 600px; margin: 0 auto; }
+.resaltado {
+  background: linear-gradient(90deg, var(--acento), #ff8fc4);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.stats { display: flex; justify-content: center; gap: 16px; margin-top: 32px; flex-wrap: wrap; }
+.stat {
+  padding: 14px 24px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.08);
+  min-width: 140px;
+}
+.stat strong { display: block; font-size: 1.6rem; color: var(--acento); }
+.stat span { font-size: 0.85rem; color: var(--texto-suave); }
+
+/* ====== Tarjetas ====== */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+.tarjeta { padding: 28px; transition: transform 0.3s, background 0.3s; }
+.tarjeta:hover { transform: translateY(-6px); background: rgba(255, 255, 255, 0.16); }
+.icono {
+  width: 52px; height: 52px;
+  display: grid; place-items: center;
+  font-size: 1.6rem;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.15);
+  margin-bottom: 16px;
+}
+.tarjeta h3 { margin-bottom: 8px; }
+.tarjeta p { color: var(--texto-suave); font-size: 0.95rem; }
+
+/* ====== Pasos ====== */
+.pasos { padding: 36px 40px; }
+.pasos ol { list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 24px; }
+.pasos li { display: flex; gap: 14px; align-items: flex-start; }
+.pasos li span {
+  flex-shrink: 0;
+  width: 40px; height: 40px;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  background: var(--acento);
+  color: #1b1037;
+  font-weight: 800;
+}
+.pasos p { color: var(--texto-suave); font-size: 0.9rem; }
+
+/* ====== Ejemplos de pedidos ====== */
+.lista-prompts { display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 16px; }
+.prompt { padding: 18px 22px; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.prompt p { font-style: italic; }
+.copiar {
+  flex-shrink: 0;
+  padding: 8px 14px;
+  border-radius: 10px;
+  border: 1px solid var(--borde);
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--texto);
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.copiar:hover { background: rgba(255, 255, 255, 0.25); }
+.copiar.listo { background: var(--acento); color: #1b1037; }
+
+/* ====== Consejo y pie ====== */
+.consejo { padding: 26px 32px; border-left: 4px solid var(--acento); }
+.consejo p { color: var(--texto-suave); margin-top: 6px; }
+footer { text-align: center; color: var(--texto-suave); font-size: 0.85rem; }
+
+/* ====== Celular ====== */
+@media (max-width: 600px) {
+  .lista-prompts { grid-template-columns: 1fr; }
+  .hero, .pasos { padding: 32px 20px; }
+  .prompt { flex-direction: column; align-items: flex-start; }
+}
